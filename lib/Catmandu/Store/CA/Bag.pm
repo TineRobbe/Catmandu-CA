@@ -19,63 +19,43 @@ sub generator {
 
 sub get {
     my ($self, $id) = @_;
-    my $field_list = [
-        'ca_objects.object_id',
-        'ca_objects.preferred_labels',
-        'ca_objects.description',
-        'ca_objects.subtitle',
-        'ca_objects.geonames',
-        'ca_objects.lcsh_terms',
-        'ca_objects.colour',
-        'ca_objects.contentActivity',
-        'ca_objects.contentConcept',
-        'ca_objects.contentDescription',
-        'ca_objects.dimensions.dimensions_width',
-        'ca_objects.dimensions.dimensions_height',
-        'ca_objects.dimensions.dimensions_depth',
-        'ca_objects.dimensions.circumference',
-        'ca_objects.dimensions.dimensions_type',
-        'ca_objects.materialInfo.materialInfostyle',
-        'ca_objects.objectProductionDate',
-        'ca_objects.techniqueInfo.techniqueInfodatePeriod',
-        'ca_objects.dateText',
-        'ca_objects.objectName.objectObjectName',
-        'ca_objects.objectWorkPid.objectWorkPidDomain',
-        'ca_objects.objectWorkPid.objectWorkPidID',
-        'ca_objects.objectRecordPid.objectRecordPidDomain',
-        'ca_objects.objectRecordPid.objectRecordPidID',
-        'ca_entities.entity_id',
-        'ca_entities.relationship_type_code'
-    ];
+    my $field_list = [];
     my $api = Catmandu::CA::API->new(
-        term       => $id,
-        field_list => $field_list,
         url        => $self->store->url,
         username   => $self->store->username,
         password   => $self->store->password
     );
-    return $api->simple();
+    return $api->simple($id);
 }
 
 sub add {
     my ($self, $data) = @_;
-    Catmandu::NotImplemented->throw(
-        message => 'Adding item to store not supported.'
+    my $api = Catmandu::CA::API->new(
+        url        => $self->store->url,
+        username   => $self->store->username,
+        password   => $self->store->password
     );
+    return $api->add($data);
 }
 
 sub update {
     my ($self, $id, $data) = @_;
-    Catmandu::NotImplemented->throw(
-        message => 'Updating item in store not supported.'
+    my $api = Catmandu::CA::API->new(
+        url        => $self->store->url,
+        username   => $self->store->username,
+        password   => $self->store->password
     );
+    return $api->update($id, $data);
 }
 
 sub delete {
     my ($self, $id) = @_;
-    Catmandu::NotImplemented->throw(
-        message => 'Deleting item from store not supported.'
+    my $api = Catmandu::CA::API->new(
+        url        => $self->store->url,
+        username   => $self->store->username,
+        password   => $self->store->password
     );
+    return $api->delete($id);
 }
 
 sub delete_all {

@@ -8,38 +8,68 @@ use Moo;
 
 use Data::Dumper qw(Dumper);
 
+use JSON;
 use Catmandu::CA::API::QueryBuilder;
 use Catmandu::CA::API::Request;
 
-has term       => (is => 'ro', required => 1);
-has field_list => (is => 'rw', default => sub {return []});
 has username   => (is => 'ro', required => 1);
 has password   => (is => 'ro', required => 1);
 has url        => (is => 'ro', required => 1);
 
 sub id {
-    my $self = shift;
-    my $q = Catmandu::CA::API::QueryBuilder->new(field_list => $self->field_list);
+    my ($self, $id, $field_list) = @_;
+    my $q = Catmandu::CA::API::QueryBuilder->new(field_list => $field_list);
     my $r = Catmandu::CA::API::Request->new(
         url       => $self->url,
-        url_query => sprintf('service.php/item/ca_objects/id/%s', $self->term),
-        query     => $q->query,
+        url_query => sprintf('service.php/item/ca_objects/id/%s', $id),
         username  => $self->username,
         password  => $self->password
     );
-    return $r->results;
+    return $r->get($q->query);
 }
 
 sub simple {
-    my $self = shift;
+    my ($self, $id) = @_;
     my $r = Catmandu::CA::API::Request->new(
         url       => $self->url,
-        url_query => sprintf('service.php/item/ca_objects/id/%s', $self->term),
-        query     => '{}',
+        url_query => sprintf('service.php/item/ca_objects/id/%s', $id),
         username  => $self->username,
         password  => $self->password
     );
-    return $r->results;
+    return $r->get('{}');
+}
+
+sub add {
+    my ($self, $data) = @_;
+    my $r = Catmandu::CA::API::Request->new(
+        url       => $self->url,
+        url_query => sprintf('service.php/item/ca_objects'),
+        username  => $self->username,
+        password  => $self->password
+    );
+    return $r->put(encode_json($data));
+}
+
+sub update {
+    my ($self, $id, $data) = @_;
+    my $r = Catmandu::CA::API::Request->new(
+        url       => $self->url,
+        url_query => sprintf('service.php/item/ca_objects/id/%s', $id),
+        username  => $self->username,
+        password  => $self->password
+    );
+    return $r->put(encode_json($data));
+}
+
+sub delete {
+    my ($self, $id) = @_;
+    my $r = Catmandu::CA::API::Request->new(
+        url       => $self->url,
+        url_query => sprintf('service.php/item/ca_objects/id/%s', $id),
+        username  => $self->username,
+        password  => $self->password
+    );
+    return $r->delete();
 }
 
 1;

@@ -48,13 +48,11 @@ sub get {
         'ca_entities.relationship_type_code'
     ];
     my $api = Catmandu::CA::API->new(
-        term       => $id,
-        field_list => $field_list,
         url        => 'http://vkc-ca-prod.inuits.eu',
         username   => $self->store->username,
         password   => $self->store->password
     );
-    return $api->simple();
+    return $api->simple($id);
 }
 
 sub add {

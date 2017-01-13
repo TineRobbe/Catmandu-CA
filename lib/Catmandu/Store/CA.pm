@@ -13,6 +13,7 @@ with 'Catmandu::Store';
 has url      => (is => 'ro', required => 1);
 has username => (is => 'ro', required => 1);
 has password => (is => 'ro', required => 1);
+has model    => (is => 'ro', default => 'ca_objects');
 
 
 1;
@@ -26,7 +27,7 @@ Catmandu::Store::CA - Retrieve items from a L<CollectiveAccess|http://collective
 =head1 SYNOPSIS
 
     # From the command line
-    catmandu export CA to YAML --id 1234 --username demo --password demo --url http://demo.collectiveaccess.org
+    catmandu export CA to YAML --id 1234 --username demo --password demo --url http://demo.collectiveaccess.org --model ca_objects
 
     # From a Catmandu Fix
     lookup_in_store(
@@ -34,7 +35,8 @@ Catmandu::Store::CA - Retrieve items from a L<CollectiveAccess|http://collective
       CA,
       url: http://demo.collectiveaccess.org,
       username: demo,
-      password: demo
+      password: demo,
+      model: ca_objects
     )
 
     # From Perl code
@@ -43,7 +45,8 @@ Catmandu::Store::CA - Retrieve items from a L<CollectiveAccess|http://collective
     my $store = Catmandu->store('CA',
         username => 'demo',
         password => 'demo',
-        url      => 'http://demo.collectiveaccess.org'
+        url      => 'http://demo.collectiveaccess.org',
+        model    => 'ca_objects'
     )->bag;
 
     my $item = $store->get('1234');
@@ -53,7 +56,6 @@ Catmandu::Store::CA - Retrieve items from a L<CollectiveAccess|http://collective
 
 A Catmandu::Store::CA is Perl package that can query a L<CollectiveAccess|http://collectiveaccess.org> instance.
 
-At the moment, only C<get> is supported.
 
 =head1 CONFIGURATION
 
@@ -70,6 +72,33 @@ items in the CA instance, it must have the necessary rights.
 
 Password for the user.
 
+=head2 model
+
+The API can access several tables from the CA instance, called I<model> in this module.
+The model is by default C<ca_objects>, but the following are also supported:
+
+=over
+
+=item C<ca_objects>
+
+=item C<ca_object_lots>
+
+=item C<ca_entities>
+
+=item C<ca_places>
+
+=item C<ca_occurrences>
+
+=item C<ca_collections>
+
+=item C<ca_storage_locations>
+
+=item C<ca_loans>
+
+=item C<ca_movements>
+
+=back
+
 =head1 METHODS
 
 =head2 new(%configuration)
@@ -81,13 +110,19 @@ Create a new Catmandu::Store::CA
 Retrieve a CA record given an identifier. This returns whatever
 the CA administrator designated as the "summary" of the record.
 
-=head2 add()
+=head2 add($data)
 
-Not supported
+Create a new CA record. See L<here|http://docs.collectiveaccess.org/wiki/Web_Service_API#Creating_new_records> to
+see what data you must provide to create a record.
 
-=head2 delete()
+=head2 update($id, $data)
 
-Not supported
+Update a new CA record. See L<here|http://docs.collectiveaccess.org/wiki/Web_Service_API#Creating_new_records> to
+see what data you must provide to create a record.
+
+=head2 delete($id)
+
+Delete (I<soft delete>) a record.
 
 =head2 each()
 

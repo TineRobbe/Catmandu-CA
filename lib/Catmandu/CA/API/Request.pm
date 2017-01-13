@@ -24,7 +24,6 @@ has password => (is => 'ro', required => 1);
 
 has token   => (is => 'lazy');
 has ua      => (is => 'lazy');
-has results => (is => 'lazy');
 
 sub _build_token {
     my $self = shift;
@@ -40,13 +39,8 @@ sub _build_ua {
     return $ua;
 }
 
-sub _build_results {
-    my $self = shift;
-    return $self->request();
-}
-
-sub request {
-    my $self = shift;
+sub get {
+    my ($self, $query) = @_;
     my $url = sprintf('%s/%s?source=%s&authToken=%s',
         $self->url,
         $self->url_query,
@@ -71,6 +65,50 @@ sub request {
         });
         return {};
     }
+}
+
+sub put {
+    my ($self, $data) = @_;
+    my $url = sprintf('%s/%s&authToken=%s', $self->url, $self->url_query, $self->token);
+    my $response = $self->ua->put($url, Content => $data, Content_type => 'application/json');
+
+    if (!$response->is_success) {
+        Catmandu::HTTPError->throw({
+                code             => $response->code,
+                message          => $response->status_line,
+                url              => $response->request->uri,
+                method           => $response->request->method,
+                request_headers  => [],
+                request_body     => $response->request->decoded_content,
+                response_headers => [],
+                response_body    => $response->decoded_content,
+        });
+        return 0;
+    }
+
+    return 1;
+}
+
+sub delete {
+    my $self = shift;
+    my $url = sprintf('%s/%s&authToken=%s', $self->url, $self->url_query, $self->token);
+    my $response = $self->ua->delete($url);
+
+    if (!$response->is_success) {
+        Catmandu::HTTPError->throw({
+                code             => $response->code,
+                message          => $response->status_line,
+                url              => $response->request->uri,
+                method           => $response->request->method,
+                request_headers  => [],
+                request_body     => $response->request->decoded_content,
+                response_headers => [],
+                response_body    => $response->decoded_content,
+        });
+        return 0;
+    }
+
+    return 1;
 }
 
 1;
