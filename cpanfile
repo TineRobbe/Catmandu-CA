@@ -9,6 +9,6 @@ on test => sub {
 requires 'LWP::UserAgent';
 requires 'Moo';
 requires 'JSON';
-requires HTTP::Request::Common;
+requires 'HTTP::Request::Common';
 
 requires 'Catmandu', '>=1.0304';
