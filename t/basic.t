@@ -8,9 +8,11 @@ my @pkgs = qw (
     Catmandu::CA::API::Request
     Catmandu::Store::VKC::Bag
     Catmandu::Store::VKC
+    Catmandu::Store::CA
+    Catmandu::Store::CA::Bag
     Catmandu::CA
 );
 
 require_ok $_ for @pkgs;
 
-done_testing 6;
+done_testing 9;
