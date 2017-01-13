@@ -16,7 +16,6 @@ use JSON;
 use Catmandu::CA::API::Login;
 
 has url       => (is => 'ro', required => 1);
-has query     => (is => 'ro', required => 1);
 has url_query => (is => 'ro', required => 1);
 
 has username => (is => 'ro', required => 1);
@@ -44,7 +43,7 @@ sub get {
     my $url = sprintf('%s/%s?source=%s&authToken=%s',
         $self->url,
         $self->url_query,
-        $self->query,
+        $query,
         $self->token
     );
     my $response = $self->ua->get($url);
