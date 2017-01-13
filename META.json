@@ -1,7 +1,7 @@
 {
-   "abstract" : "Blah blah blah",
+   "abstract" : "Catmandu interface to L<CollectiveAccess|http://collectiveaccess.org/>",
    "author" : [
-      "Pieter De Praetere <pieter.de.praetere@helptux.be>"
+      "Pieter De Praetere <pieter at packed.be>"
    ],
    "dynamic_config" : 0,
    "generated_by" : "Dist::Milla version v1.0.17, Dist::Zilla version 6.008, CPAN::Meta::Converter version 2.150010",
@@ -37,6 +37,11 @@
       },
       "runtime" : {
          "requires" : {
+            "Catmandu" : "1.0304",
+            "HTTP::Request::Common" : "0",
+            "JSON" : "0",
+            "LWP::UserAgent" : "0",
+            "Moo" : "0",
             "perl" : "5.008005"
          }
       },
@@ -47,7 +52,21 @@
       }
    },
    "release_status" : "stable",
+   "resources" : {
+      "bugtracker" : {
+         "web" : "https://github.com/thedatahub/Catmandu-CA/issues"
+      },
+      "homepage" : "https://github.com/thedatahub/Catmandu-CA",
+      "repository" : {
+         "type" : "git",
+         "url" : "https://github.com/thedatahub/Catmandu-CA.git",
+         "web" : "https://github.com/thedatahub/Catmandu-CA"
+      }
+   },
    "version" : "0.01",
+   "x_contributors" : [
+      "Pieter De Praetere <pieter@packed.be>"
+   ],
    "x_serialization_backend" : "Cpanel::JSON::XS version 3.0217"
 }
 
