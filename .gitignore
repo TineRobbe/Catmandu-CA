@@ -5,3 +5,7 @@
 MYMETA.*
 !META.json
 /.prove
+t/data.json
+t/test.fix
+t/test.sh
+.DS_Store

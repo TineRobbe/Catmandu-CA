@@ -1,8 +1,16 @@
 use strict;
 use Test::More;
-use Catmandu::CA;
 
-# replace with the actual test
-ok 1;
+my @pkgs = qw (
+    Catmandu::CA::API
+    Catmandu::CA::API::Login
+    Catmandu::CA::API::QueryBuilder
+    Catmandu::CA::API::Request
+    Catmandu::Store::VKC::Bag
+    Catmandu::Store::VKC
+    Catmandu::CA
+);
 
-done_testing;
+require_ok $_ for @pkgs;
+
+done_testing 6;

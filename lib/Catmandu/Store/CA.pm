@@ -1,4 +1,4 @@
-package Catmandu::Store::VKC;
+package Catmandu::Store::CA;
 
 use strict;
 use warnings;
@@ -6,12 +6,14 @@ use warnings;
 use Moo;
 use Catmandu::Sane;
 
-use Catmandu::Store::VKC::Bag;
+use Catmandu::Store::CA::Bag;
 
 with 'Catmandu::Store';
 
+has url      => (is => 'ro', required => 1);
 has username => (is => 'ro', required => 1);
 has password => (is => 'ro', required => 1);
+
 
 1;
 __END__
@@ -19,17 +21,18 @@ __END__
 
 =head1 NAME
 
-Catmandu::Store::VKC - Retrieve items from the L<CollectiveAccess|http://collectiveaccess.org/> instance of the L<VKC|http://www.vlaamsekunstcollectie.be/>
+Catmandu::Store::CA - Retrieve items from a L<CollectiveAccess|http://collectiveaccess.org/> instance
 
 =head1 SYNOPSIS
 
     # From the command line
-    catmandu export CA to YAML --id 1234 --username demo --password demo
+    catmandu export CA to YAML --id 1234 --username demo --password demo --url http://demo.collectiveaccess.org
 
     # From a Catmandu Fix
     lookup_in_store(
       object_id,
       CA,
+      url: http://demo.collectiveaccess.org,
       username: demo,
       password: demo
     )
@@ -40,6 +43,7 @@ Catmandu::Store::VKC - Retrieve items from the L<CollectiveAccess|http://collect
     my $store = Catmandu->store('CA',
         username => 'demo',
         password => 'demo',
+        url      => 'http://demo.collectiveaccess.org'
     )->bag;
 
     my $item = $store->get('1234');
@@ -47,12 +51,15 @@ Catmandu::Store::VKC - Retrieve items from the L<CollectiveAccess|http://collect
 
 =head1 DESCRIPTION
 
-A Catmandu::Store::VKC is Perl package that can query the L<CollectiveAccess|http://collectiveaccess.org> instance of the L<VKC|http://www.vlaamsekunstcollectie.be/>.
-It functions identically to L<Catmandu::Store::CA>, but does not require the C<url> parameter to be set.
+A Catmandu::Store::CA is Perl package that can query a L<CollectiveAccess|http://collectiveaccess.org> instance.
 
 At the moment, only C<get> is supported.
 
 =head1 CONFIGURATION
+
+=head2 url
+
+C<url> of the CA instance (e.g. I<http://demo.collectiveaccess.org>).
 
 =head2 username
 
@@ -102,7 +109,7 @@ it under the same terms as Perl itself.
 =head1 SEE ALSO
 
 L<Catmandu>
-L<Catmandu::Store::CA>
+L<Catmandu::Store::VKC>
 L<Catmandu::CA::API>
 
 =cut
