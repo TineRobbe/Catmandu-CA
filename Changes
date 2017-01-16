@@ -1,6 +1,7 @@
 Revision history for Catmandu-CA
 
 {{$NEXT}}
+        - Added language switch
 
 0.02  2017-01-13 15:08:08 UTC
         - Added update/add/delete for Catmandu::Store::CA

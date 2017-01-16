@@ -12,6 +12,7 @@ with 'Catmandu::Store';
 
 has username => (is => 'ro', required => 1);
 has password => (is => 'ro', required => 1);
+has lang     => (is => 'ro', default => 'nl_NL');
 
 1;
 __END__
@@ -24,14 +25,15 @@ Catmandu::Store::VKC - Retrieve items from the L<CollectiveAccess|http://collect
 =head1 SYNOPSIS
 
     # From the command line
-    catmandu export CA to YAML --id 1234 --username demo --password demo
+    catmandu export CA to YAML --id 1234 --username demo --password demo --lang nl_NL
 
     # From a Catmandu Fix
     lookup_in_store(
       object_id,
       CA,
       username: demo,
-      password: demo
+      password: demo,
+      lang: nl_NL
     )
 
     # From Perl code
@@ -40,6 +42,7 @@ Catmandu::Store::VKC - Retrieve items from the L<CollectiveAccess|http://collect
     my $store = Catmandu->store('CA',
         username => 'demo',
         password => 'demo',
+        lang     => 'nl_NL'
     )->bag;
 
     my $item = $store->get('1234');
@@ -62,6 +65,12 @@ items in the CA instance, it must have the necessary rights.
 =head2 password
 
 Password for the user.
+
+=head2 lang
+
+The language (locale) in which to return the data. Set to C<nl_NL> by default,
+will automatically fall back to C<en_US> if the attribute does not exist in the
+selected locale. Use the L<IETF language tag|https://en.wikipedia.org/wiki/IETF_language_tag>.
 
 =head1 METHODS
 

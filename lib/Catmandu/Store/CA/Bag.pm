@@ -23,7 +23,8 @@ sub get {
     my $api = Catmandu::CA::API->new(
         url        => $self->store->url,
         username   => $self->store->username,
-        password   => $self->store->password
+        password   => $self->store->password,
+        lang       => $self->store->lang
     );
     return $api->simple($id);
 }
@@ -33,7 +34,8 @@ sub add {
     my $api = Catmandu::CA::API->new(
         url        => $self->store->url,
         username   => $self->store->username,
-        password   => $self->store->password
+        password   => $self->store->password,
+        lang       => $self->store->lang
     );
     return $api->add($data);
 }
@@ -43,7 +45,8 @@ sub update {
     my $api = Catmandu::CA::API->new(
         url        => $self->store->url,
         username   => $self->store->username,
-        password   => $self->store->password
+        password   => $self->store->password,
+        lang       => $self->store->lang
     );
     return $api->update($id, $data);
 }
@@ -53,7 +56,8 @@ sub delete {
     my $api = Catmandu::CA::API->new(
         url        => $self->store->url,
         username   => $self->store->username,
-        password   => $self->store->password
+        password   => $self->store->password,
+        lang       => $self->store->lang
     );
     return $api->delete($id);
 }

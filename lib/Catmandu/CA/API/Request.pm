@@ -21,6 +21,8 @@ has url_query => (is => 'ro', required => 1);
 has username => (is => 'ro', required => 1);
 has password => (is => 'ro', required => 1);
 
+has lang => (is => 'ro', default => 'nl_NL');
+
 has token   => (is => 'lazy');
 has ua      => (is => 'lazy');
 
@@ -40,11 +42,12 @@ sub _build_ua {
 
 sub get {
     my ($self, $query) = @_;
-    my $url = sprintf('%s/%s?source=%s&authToken=%s',
+    my $url = sprintf('%s/%s?source=%s&authToken=%s&lang=%s',
         $self->url,
         $self->url_query,
         $query,
-        $self->token
+        $self->token,
+        $self->lang
     );
     my $response = $self->ua->get($url);
     if ($response->is_success) {

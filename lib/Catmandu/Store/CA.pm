@@ -14,6 +14,7 @@ has url      => (is => 'ro', required => 1);
 has username => (is => 'ro', required => 1);
 has password => (is => 'ro', required => 1);
 has model    => (is => 'ro', default => 'ca_objects');
+has lang     => (is => 'ro', default => 'nl_NL');
 
 
 1;
@@ -27,7 +28,7 @@ Catmandu::Store::CA - Retrieve items from a L<CollectiveAccess|http://collective
 =head1 SYNOPSIS
 
     # From the command line
-    catmandu export CA to YAML --id 1234 --username demo --password demo --url http://demo.collectiveaccess.org --model ca_objects
+    catmandu export CA to YAML --id 1234 --username demo --password demo --url http://demo.collectiveaccess.org --model ca_objects --lang nl_NL
 
     # From a Catmandu Fix
     lookup_in_store(
@@ -36,7 +37,8 @@ Catmandu::Store::CA - Retrieve items from a L<CollectiveAccess|http://collective
       url: http://demo.collectiveaccess.org,
       username: demo,
       password: demo,
-      model: ca_objects
+      model: ca_objects,
+      lang: nl_NL
     )
 
     # From Perl code
@@ -46,7 +48,8 @@ Catmandu::Store::CA - Retrieve items from a L<CollectiveAccess|http://collective
         username => 'demo',
         password => 'demo',
         url      => 'http://demo.collectiveaccess.org',
-        model    => 'ca_objects'
+        model    => 'ca_objects',
+        lang     => 'nl_NL'
     )->bag;
 
     my $item = $store->get('1234');
@@ -98,6 +101,12 @@ The model is by default C<ca_objects>, but the following are also supported:
 =item C<ca_movements>
 
 =back
+
+=head2 lang
+
+The language (locale) in which to return the data. Set to C<nl_NL> by default,
+will automatically fall back to C<en_US> if the attribute does not exist in the
+selected locale. Use the L<IETF language tag|https://en.wikipedia.org/wiki/IETF_language_tag>.
 
 =head1 METHODS
 

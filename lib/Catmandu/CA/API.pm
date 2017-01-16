@@ -15,6 +15,7 @@ use Catmandu::CA::API::Request;
 has username   => (is => 'ro', required => 1);
 has password   => (is => 'ro', required => 1);
 has url        => (is => 'ro', required => 1);
+has lang       => (is => 'ro', default => 'nl_NL');
 
 sub id {
     my ($self, $id, $field_list) = @_;
@@ -23,7 +24,8 @@ sub id {
         url       => $self->url,
         url_query => sprintf('service.php/item/ca_objects/id/%s', $id),
         username  => $self->username,
-        password  => $self->password
+        password  => $self->password,
+        lagn      => $self->lang
     );
     return $r->get($q->query);
 }
@@ -34,7 +36,8 @@ sub simple {
         url       => $self->url,
         url_query => sprintf('service.php/item/ca_objects/id/%s', $id),
         username  => $self->username,
-        password  => $self->password
+        password  => $self->password,
+        lagn      => $self->lang
     );
     return $r->get('{}');
 }
@@ -45,7 +48,8 @@ sub add {
         url       => $self->url,
         url_query => sprintf('service.php/item/ca_objects'),
         username  => $self->username,
-        password  => $self->password
+        password  => $self->password,
+        lagn      => $self->lang
     );
     return $r->put(encode_json($data));
 }
@@ -56,7 +60,8 @@ sub update {
         url       => $self->url,
         url_query => sprintf('service.php/item/ca_objects/id/%s', $id),
         username  => $self->username,
-        password  => $self->password
+        password  => $self->password,
+        lagn      => $self->lang
     );
     return $r->put(encode_json($data));
 }
@@ -67,7 +72,8 @@ sub delete {
         url       => $self->url,
         url_query => sprintf('service.php/item/ca_objects/id/%s', $id),
         username  => $self->username,
-        password  => $self->password
+        password  => $self->password,
+        lagn      => $self->lang
     );
     return $r->delete();
 }

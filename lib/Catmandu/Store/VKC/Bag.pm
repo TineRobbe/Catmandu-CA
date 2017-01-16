@@ -50,7 +50,8 @@ sub get {
     my $api = Catmandu::CA::API->new(
         url        => 'http://vkc-ca-prod.inuits.eu',
         username   => $self->store->username,
-        password   => $self->store->password
+        password   => $self->store->password,
+        lang       => $self->store->lang
     );
     return $api->simple($id);
 }
