@@ -10,9 +10,21 @@ use Catmandu::Store::VKC::Bag;
 
 with 'Catmandu::Store';
 
-has username => (is => 'ro', required => 1);
-has password => (is => 'ro', required => 1);
-has lang     => (is => 'ro', default => 'nl_NL');
+extends 'Catmandu::Store::CA';
+
+has username    => (is => 'ro', required => 1);
+has password    => (is => 'ro', required => 1);
+has model       => (is => 'ro', default => 'ca_objects');
+has lang        => (is => 'ro', default => 'nl_NL');
+has _field_list => (is => 'rw', default => sub { return []; });
+
+
+has url         => (is => 'lazy');
+
+sub _build_url {
+    my $self = shift;
+    return 'http://vkc-ca-prod.inuits.eu';
+}
 
 1;
 __END__

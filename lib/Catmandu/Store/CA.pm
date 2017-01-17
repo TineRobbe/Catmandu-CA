@@ -6,16 +6,42 @@ use warnings;
 use Moo;
 use Catmandu::Sane;
 
+use Data::Dumper qw(Dumper);
+
 use Catmandu::Store::CA::Bag;
 
 with 'Catmandu::Store';
 
-has url      => (is => 'ro', required => 1);
-has username => (is => 'ro', required => 1);
-has password => (is => 'ro', required => 1);
-has model    => (is => 'ro', default => 'ca_objects');
-has lang     => (is => 'ro', default => 'nl_NL');
+has url         => (is => 'ro', required => 1);
+has username    => (is => 'ro', required => 1);
+has password    => (is => 'ro', required => 1);
+has model       => (is => 'ro', default => 'ca_objects');
+has lang        => (is => 'ro', default => 'nl_NL');
+has _field_list => (is => 'rw', default => sub { return []; });
 
+sub BUILDARGS {
+    my ($class, %args) = @_;
+
+    my $field_list = delete $args{'field_list'};
+
+    if ($field_list) {
+        my @list = split(/,/, $field_list);
+        my @fields = map { $_ =~ s/^\s+//; $_; } @list;
+        $args{'_field_list'} = \@fields;
+    }
+    return \%args;
+}
+
+sub field_list {
+    my ($self, $field_list) = @_;
+    if ($field_list) {
+        my @list = split(/,/, $field_list);
+        my @fields = map { $_ =~ s/^\s+//; $_; } @list;
+        $self->_field_list = \@fields;
+    } else {
+        return join(',', @{$self->_field_list});
+    }
+}
 
 1;
 __END__
@@ -38,18 +64,20 @@ Catmandu::Store::CA - Retrieve items from a L<CollectiveAccess|http://collective
       username: demo,
       password: demo,
       model: ca_objects,
-      lang: nl_NL
+      lang: nl_NL,
+      field_list: 'ca_entities,preferred_labels'
     )
 
     # From Perl code
     use Catmandu;
 
     my $store = Catmandu->store('CA',
-        username => 'demo',
-        password => 'demo',
-        url      => 'http://demo.collectiveaccess.org',
-        model    => 'ca_objects',
-        lang     => 'nl_NL'
+        username   => 'demo',
+        password   => 'demo',
+        url        => 'http://demo.collectiveaccess.org',
+        model      => 'ca_objects',
+        lang       => 'nl_NL',
+        field_list => 'ca_entities,preferred_labels'
     )->bag;
 
     my $item = $store->get('1234');
