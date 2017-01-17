@@ -8,8 +8,6 @@ use warnings;
 use Moo;
 use Catmandu::Sane;
 
-use Data::Dumper qw(Dumper);
-
 use LWP::UserAgent;
 use JSON;
 

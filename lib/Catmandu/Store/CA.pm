@@ -6,8 +6,6 @@ use warnings;
 use Moo;
 use Catmandu::Sane;
 
-use Data::Dumper qw(Dumper);
-
 use Catmandu::Store::CA::Bag;
 
 with 'Catmandu::Store';

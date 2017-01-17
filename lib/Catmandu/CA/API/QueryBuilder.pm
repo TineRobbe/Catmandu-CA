@@ -14,6 +14,11 @@ has query => (is => 'lazy');
 
 sub _build_query {
     my $self = shift;
+
+    if (scalar @{$self->field_list} == 0) {
+        return encode_json({});
+    }
+
     my $query = {
         'bundles' => {}
     };

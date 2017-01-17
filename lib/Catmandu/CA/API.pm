@@ -6,8 +6,6 @@ use warnings;
 use Catmandu::Sane;
 use Moo;
 
-use Data::Dumper qw(Dumper);
-
 use JSON;
 use Catmandu::CA::API::QueryBuilder;
 use Catmandu::CA::API::Request;
