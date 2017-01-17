@@ -1,7 +1,12 @@
 Revision history for Catmandu-CA
 
 {{$NEXT}}
+
+0.03  2017-01-17 13:22:47 UTC
         - Added language switch
+        - Added a field_list
+        - Updated documentation
+        - Moved all functionality to Store::CA & Store::CA::Bag and made Store::VKC inherit from Store::CA
 
 0.02  2017-01-13 15:08:08 UTC
         - Added update/add/delete for Catmandu::Store::CA
