@@ -54,7 +54,7 @@ Catmandu::Store::CA - Retrieve items from a L<CollectiveAccess|http://collective
 =head1 SYNOPSIS
 
     # From the command line
-    catmandu export CA to YAML --id 1234 --username demo --password demo --url http://demo.collectiveaccess.org --model ca_objects --lang nl_NL
+    catmandu export CA to YAML --id 1234 --username demo --password demo --url http://demo.collectiveaccess.org --model ca_objects --lang nl_NL --field_list 'ca_entities, preferred_labels'
 
     # From a Catmandu Fix
     lookup_in_store(
@@ -65,7 +65,7 @@ Catmandu::Store::CA - Retrieve items from a L<CollectiveAccess|http://collective
       password: demo,
       model: ca_objects,
       lang: nl_NL,
-      field_list: 'ca_entities,preferred_labels'
+      field_list: 'ca_entities, preferred_labels'
     )
 
     # From Perl code
@@ -77,7 +77,7 @@ Catmandu::Store::CA - Retrieve items from a L<CollectiveAccess|http://collective
         url        => 'http://demo.collectiveaccess.org',
         model      => 'ca_objects',
         lang       => 'nl_NL',
-        field_list => 'ca_entities,preferred_labels'
+        field_list => 'ca_entities, preferred_labels'
     )->bag;
 
     my $item = $store->get('1234');
@@ -135,6 +135,11 @@ The model is by default C<ca_objects>, but the following are also supported:
 The language (locale) in which to return the data. Set to C<nl_NL> by default,
 will automatically fall back to C<en_US> if the attribute does not exist in the
 selected locale. Use the L<IETF language tag|https://en.wikipedia.org/wiki/IETF_language_tag>.
+
+=head2 field_list
+
+A comma-separated, quoted, (C<'foo, bar'>) list of fields that the CollectiveAccess
+API should return. Is optional and can be left empty to return the default 'summary'.
 
 =head1 METHODS
 

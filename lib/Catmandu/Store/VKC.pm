@@ -37,24 +37,28 @@ Catmandu::Store::VKC - Retrieve items from the L<CollectiveAccess|http://collect
 =head1 SYNOPSIS
 
     # From the command line
-    catmandu export CA to YAML --id 1234 --username demo --password demo --lang nl_NL
+    catmandu export VKC to YAML --id 1234 --username demo --password demo  --model ca_objects --lang nl_NL --field_list 'ca_entities, preferred_labels'
 
     # From a Catmandu Fix
     lookup_in_store(
       object_id,
-      CA,
+      VKC,
       username: demo,
       password: demo,
-      lang: nl_NL
+      lang: nl_NL,
+      model: ca_objects,
+      field_list: 'ca_entities, preferred_labels'
     )
 
     # From Perl code
     use Catmandu;
 
     my $store = Catmandu->store('CA',
-        username => 'demo',
-        password => 'demo',
-        lang     => 'nl_NL'
+        username   => 'demo',
+        password   => 'demo',
+        lang       => 'nl_NL',
+        model      => ca_objects,
+        field_list =>'ca_entities, preferred_labels'
     )->bag;
 
     my $item = $store->get('1234');
@@ -64,8 +68,6 @@ Catmandu::Store::VKC - Retrieve items from the L<CollectiveAccess|http://collect
 
 A Catmandu::Store::VKC is Perl package that can query the L<CollectiveAccess|http://collectiveaccess.org> instance of the L<VKC|http://www.vlaamsekunstcollectie.be/>.
 It functions identically to L<Catmandu::Store::CA>, but does not require the C<url> parameter to be set.
-
-At the moment, only C<get> is supported.
 
 =head1 CONFIGURATION
 
@@ -84,24 +86,35 @@ The language (locale) in which to return the data. Set to C<nl_NL> by default,
 will automatically fall back to C<en_US> if the attribute does not exist in the
 selected locale. Use the L<IETF language tag|https://en.wikipedia.org/wiki/IETF_language_tag>.
 
+=head2 field_list
+
+A comma-separated, quoted, (C<'foo, bar'>) list of fields that the CollectiveAccess
+API should return. Is optional and can be left empty to return the default 'summary'.
+
 =head1 METHODS
 
 =head2 new(%configuration)
 
-Create a new Catmandu::Store::CA
+Create a new Catmandu::Store::VKC
 
 =head2 get($id)
 
 Retrieve a CA record given an identifier. This returns whatever
 the CA administrator designated as the "summary" of the record.
 
-=head2 add()
+=head2 add($data)
 
-Not supported
+Create a new CA record. See L<here|http://docs.collectiveaccess.org/wiki/Web_Service_API#Creating_new_records> to
+see what data you must provide to create a record.
 
-=head2 delete()
+=head2 update($id, $data)
 
-Not supported
+Update a new CA record. See L<here|http://docs.collectiveaccess.org/wiki/Web_Service_API#Creating_new_records> to
+see what data you must provide to create a record.
+
+=head2 delete($id)
+
+Delete (I<soft delete>) a record.
 
 =head2 each()
 
