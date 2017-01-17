@@ -2,6 +2,10 @@ Revision history for Catmandu-CA
 
 {{$NEXT}}
 
+0.04  2017-01-17 13:27:56 UTC
+	- Removed Data::Dumper
+	- Bugfix for empty field_list
+
 0.03  2017-01-17 13:22:47 UTC
         - Added language switch
         - Added a field_list
