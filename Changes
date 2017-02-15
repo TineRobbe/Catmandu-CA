@@ -2,6 +2,9 @@ Revision history for Catmandu-CA
 
 {{$NEXT}}
 
+0.06  2017-02-15 14:14:15 UTC
+	- Added support for field_list as array
+
 0.05  2017-02-15 13:27:00 UTC
         - Added support for ->each()
 
