@@ -166,7 +166,7 @@ Delete (I<soft delete>) a record.
 
 =head2 each()
 
-Not supported
+List all items in the instance and iterate over them one at the time. Returns a single object.
 
 =head1 AUTHOR
 
