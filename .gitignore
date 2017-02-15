@@ -8,4 +8,5 @@ MYMETA.*
 t/data.json
 t/test.fix
 t/test.sh
+t/test.pl
 .DS_Store

@@ -40,7 +40,14 @@ sub _build_ua {
 
 sub get {
     my ($self, $query) = @_;
-    my $url = sprintf('%s/%s?source=%s&authToken=%s&lang=%s',
+    my $url_string = '%s/%s?source=%s&authToken=%s&lang=%s';
+
+    # If $self->url_query matches a '?' with no more '/' behind it
+    if ($self->url_query =~ /\?[^\/]/) {
+        $url_string = '%s/%s&source=%s&authToken=%s&lang=%s';
+    }
+
+    my $url = sprintf($url_string,
         $self->url,
         $self->url_query,
         $query,
@@ -110,6 +117,5 @@ sub delete {
 
     return 1;
 }
-
 1;
 __END__
