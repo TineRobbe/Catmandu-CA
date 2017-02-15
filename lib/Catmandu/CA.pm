@@ -6,7 +6,7 @@ use warnings;
 use Catmandu::Sane;
 use Moo;
 
-our $VERSION = '0.04';
+our $VERSION = '0.05';
 
 1;
 __END__
