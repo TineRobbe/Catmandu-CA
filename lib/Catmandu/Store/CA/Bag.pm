@@ -39,8 +39,15 @@ sub each {
     my $n = 0;
     my $field_list = $self->store->_field_list;
     my $stack = $self->api->list($field_list)->{'results'};
-    while (my $data = pop @{$stack}) {
-        $sub->($data);
+
+    while (my $record = pop @{$stack}) {
+
+        if ($self->store->display eq 'full') {
+            $record = $self->api->id($record->{id}, $field_list);
+        }
+
+        $sub->($record);
+
         $n++;
     }
     return $n;
