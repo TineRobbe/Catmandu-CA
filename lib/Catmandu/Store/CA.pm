@@ -16,36 +16,37 @@ has password    => (is => 'ro', required => 1);
 has model       => (is => 'ro', default => 'ca_objects');
 has lang        => (is => 'ro', default => 'nl_NL');
 has _field_list => (is => 'rw', default => sub { return []; });
+has display     => (is => 'rw', default => 'teaser');
 
-sub BUILDARGS {
-    my ($class, %args) = @_;
+# sub BUILDARGS {
+#     my ($class, %args) = @_;
 
-    my $field_list = delete $args{'field_list'};
+#     my $field_list = delete $args{'field_list'};
 
-    if ($field_list) {
-        if (ref($field_list) eq 'ARRAY') {
-            # If the module is called from another script
-            $args{'_field_list'} = $field_list;
-        } else {
-            # If the module is called from a fix
-            my @list = split(/,/, $field_list);
-            my @fields = map { $_ =~ s/^\s+//; $_; } @list;
-            $args{'_field_list'} = \@fields;
-        }
-    }
-    return \%args;
-}
+#     if ($field_list) {
+#         if (ref($field_list) eq 'ARRAY') {
+#             # If the module is called from another script
+#             $args{'_field_list'} = $field_list;
+#         } else {
+#             # If the module is called from a fix
+#             my @list = split(/,/, $field_list);
+#             my @fields = map { $_ =~ s/^\s+//; $_; } @list;
+#             $args{'_field_list'} = \@fields;
+#         }
+#     }
+#     return \%args;
+# }
 
-sub field_list {
-    my ($self, $field_list) = @_;
-    if ($field_list) {
-        my @list = split(/,/, $field_list);
-        my @fields = map { $_ =~ s/^\s+//; $_; } @list;
-        $self->_field_list = \@fields;
-    } else {
-        return join(',', @{$self->_field_list});
-    }
-}
+# sub field_list {
+#     my ($self, $field_list) = @_;
+#     if ($field_list) {
+#         my @list = split(/,/, $field_list);
+#         my @fields = map { $_ =~ s/^\s+//; $_; } @list;
+#         $self->_field_list = \@fields;
+#     } else {
+#         return join(',', @{$self->_field_list});
+#     }
+# }
 
 1;
 __END__
