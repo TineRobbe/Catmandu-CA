@@ -47,14 +47,10 @@ Catmandu::CA - Catmandu interface to L<CollectiveAccess|http://collectiveaccess.
 
 Pieter De Praetere E<lt>pieter at packed.beE<gt>
 
-=head1 COPYRIGHT
+=head1 COPYRIGHT AND LICENSE
 
-Copyright 2017- PACKED vzw
-
-=head1 LICENSE
-
-This library is free software; you can redistribute it and/or modify
-it under the same terms as Perl itself.
+This software is copyright (c) 2017 by PACKED, vzw, Vlaamse Kunstcollectie, vzw.
+This is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License, Version 3, June 2007.
 
 =head1 SEE ALSO
 
