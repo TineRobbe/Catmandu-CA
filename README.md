@@ -5,7 +5,7 @@ Catmandu::CA - Catmandu interface to [CollectiveAccess](http://collectiveaccess.
 # SYNOPSIS
 
     # From the command line
-    catmandu export CA to YAML --id 1234 --username demo --password demo --url http://demo.collectiveaccess.org
+    catmandu export CA --id 1234 --username demo --password demo --url http://demo.collectiveaccess.org to YAML
 
     # From a Catmandu Fix
     lookup_in_store(
