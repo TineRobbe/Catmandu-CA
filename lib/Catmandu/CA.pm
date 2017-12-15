@@ -7,6 +7,7 @@ our $VERSION = '0.06';
 use Moo;
 
 1;
+
 __END__
 
 =encoding utf-8
@@ -18,7 +19,7 @@ Catmandu::CA - Catmandu interface to L<CollectiveAccess|http://collectiveaccess.
 =head1 SYNOPSIS
 
     # From the command line
-    catmandu export CA to YAML --id 1234 --username demo --password demo --url http://demo.collectiveaccess.org
+    catmandu export CA --id 1234 --username demo --password demo --url http://demo.collectiveaccess.org to YAML
 
     # From a Catmandu Fix
     lookup_in_store(

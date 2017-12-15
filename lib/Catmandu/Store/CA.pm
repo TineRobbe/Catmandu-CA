@@ -58,7 +58,7 @@ Catmandu::Store::CA - Retrieve items from a L<CollectiveAccess|http://collective
 =head1 SYNOPSIS
 
     # From the command line
-    catmandu export CA to YAML --id 1234 --username demo --password demo --url http://demo.collectiveaccess.org --model ca_objects --lang nl_NL --field_list 'ca_entities, preferred_labels'
+    catmandu export CA --id 1234 --username demo --password demo --url http://demo.collectiveaccess.org --model ca_objects --lang nl_NL --field_list 'ca_entities, preferred_labels' to YAML
 
     # From a Catmandu Fix
     lookup_in_store(
