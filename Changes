@@ -2,6 +2,7 @@ Revision history for Catmandu-CA
 
 {{$NEXT}}
 
+        - Fixed #2: Fix README documentation.
         - Fixed #1: Removes the VKC module.
         - Changed: refactored the requied packages, added $VERSION variable.
         - Changed: amended dist.ini, license to GPL3.
