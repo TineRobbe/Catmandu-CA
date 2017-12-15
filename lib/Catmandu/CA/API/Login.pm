@@ -1,15 +1,11 @@
 package Catmandu::CA::API::Login;
 
-our $VERSION = '0.06';
-
-use strict;
-use warnings;
-
-use Moo;
 use Catmandu::Sane;
 
-use Data::Dumper qw(Dumper);
+our $VERSION = '0.06';
 
+use Moo;
+use Data::Dumper qw(Dumper);
 use LWP::UserAgent;
 use HTTP::Request::Common;
 use JSON;

@@ -1,11 +1,10 @@
 package Catmandu::CA::API;
 
-use strict;
-use warnings;
-
 use Catmandu::Sane;
-use Moo;
 
+our $VERSION = '0.06';
+
+use Moo;
 use JSON;
 use Catmandu::CA::API::QueryBuilder;
 use Catmandu::CA::API::Request;

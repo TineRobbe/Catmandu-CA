@@ -1,11 +1,10 @@
 package Catmandu::Store::VKC;
 
-use strict;
-use warnings;
-
-use Moo;
 use Catmandu::Sane;
 
+our $VERSION = '0.06';
+
+use Moo;
 use Catmandu::Store::VKC::Bag;
 
 with 'Catmandu::Store';

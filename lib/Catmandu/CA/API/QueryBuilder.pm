@@ -1,11 +1,10 @@
 package Catmandu::CA::API::QueryBuilder;
 
-use strict;
-use warnings;
-
-use Moo;
 use Catmandu::Sane;
 
+our $VERSION = '0.06';
+
+use Moo;
 use JSON;
 
 has field_list => (is => 'ro', required => 1);

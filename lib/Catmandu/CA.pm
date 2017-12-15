@@ -1,12 +1,10 @@
 package Catmandu::CA;
 
-use strict;
-use warnings;
-
 use Catmandu::Sane;
-use Moo;
 
 our $VERSION = '0.06';
+
+use Moo;
 
 1;
 __END__

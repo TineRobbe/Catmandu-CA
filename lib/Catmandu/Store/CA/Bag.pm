@@ -1,11 +1,10 @@
 package Catmandu::Store::CA::Bag;
 
-use strict;
-use warnings;
-
-use Moo;
 use Catmandu::Sane;
 
+our $VERSION = '0.06';
+
+use Moo;
 use Catmandu::CA::API;
 
 with 'Catmandu::Bag';

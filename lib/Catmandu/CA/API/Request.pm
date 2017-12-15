@@ -1,16 +1,12 @@
 package Catmandu::CA::API::Request;
 
-our $VERSION = '0.06';
-
-use strict;
-use warnings;
-
-use Moo;
 use Catmandu::Sane;
 
+our $VERSION = '0.06';
+
+use Moo;
 use LWP::UserAgent;
 use JSON;
-
 use Catmandu::CA::API::Login;
 
 has url       => (is => 'ro', required => 1);

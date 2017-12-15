@@ -2,6 +2,8 @@ Revision history for Catmandu-CA
 
 {{$NEXT}}
 
+        - Changed: refactored the requied packages, added $VERSION variable.
+        - Changed: amended dist.ini, license to GPL3.
         - Changed: disabled the sub_around call in CA store because buggy.
         - Added: a display parameter for the list call.
 
